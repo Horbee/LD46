@@ -1,0 +1,86 @@
+package com.honor.assets;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+
+public class AssetLoader {
+
+  public static final String COVER_TEX = "cover.png";
+  public static final String START_TEX = "start.png";
+  public static final String SPRITES_ATLAS = "sprites/sprites.atlas";
+  public static final String TEST_LEVEL = "levels/testlevel.tmx";
+  public static final String BALOO_SB_FONT = "fonts/BalooBhaina2-SemiBold.ttf";
+
+  public static final String HURT_SOUND = "hurt.wav";
+  public static final String SHOOT_SOUND = "shoot.wav";
+  public static final String EXPLODE_SOUND = "explode.mp3";
+  public static final String HEALTH_SOUND = "health.wav";
+  public static final String MUSIC = "music.mp3";
+
+  private AssetManager assetManager;
+
+  public AssetLoader() {
+    assetManager = new AssetManager();
+  }
+
+  public void queueAssets() {
+    // Loading textures
+    assetManager.load(COVER_TEX, Texture.class);
+    assetManager.load(START_TEX, Texture.class);
+
+    // Texture Atlasses
+    assetManager.load(SPRITES_ATLAS, TextureAtlas.class);
+
+    // Loading Sounds and Music
+    assetManager.load(HURT_SOUND, Sound.class);
+    assetManager.load(SHOOT_SOUND, Sound.class);
+    assetManager.load(EXPLODE_SOUND, Sound.class);
+    assetManager.load(HEALTH_SOUND, Sound.class);
+    assetManager.load(MUSIC, Music.class);
+    
+    // Loading TMX levels
+    assetManager.setLoader(TiledMap.class, new TmxMapLoader());
+    assetManager.load(TEST_LEVEL, TiledMap.class);
+    
+    // Loading Fonts
+    FileHandleResolver resolver = new InternalFileHandleResolver();
+    assetManager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
+    assetManager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
+    
+    FreeTypeFontLoaderParameter balooFont = new FreeTypeFontLoaderParameter();
+    balooFont.fontFileName = BALOO_SB_FONT;
+    balooFont.fontParameters.size = 24;
+    assetManager.load(BALOO_SB_FONT, BitmapFont.class, balooFont);
+  }
+
+  public boolean update() {
+    return assetManager.update();
+  }
+
+  public float getProgress() {
+    return assetManager.getProgress();
+  }
+
+  public <T> T get(String fileName) {
+    return assetManager.get(fileName);
+  }
+
+  public void dispose() {
+    Gdx.app.log("AssetLoader", "Cleanup");
+    assetManager.dispose();
+  }
+
+}

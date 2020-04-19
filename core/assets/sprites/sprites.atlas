@@ -1,0 +1,55 @@
+
+sprites.png
+size: 512,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+goblin_down
+  rotate: false
+  xy: 134, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+goblin_up
+  rotate: false
+  xy: 68, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+hearth
+  rotate: false
+  xy: 266, 68
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+player_down
+  rotate: false
+  xy: 2, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+player_up
+  rotate: false
+  xy: 200, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+projectile
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+score
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
