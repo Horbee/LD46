@@ -35,6 +35,7 @@ public class B2dContactListener implements ContactListener {
     
     if (collisionOfObjects(fa, fb, Player.class, Goblin.class)) {
       getFromContact(fa, fb, Player.class).takeDamage();
+      getFromContact(fa, fb, Goblin.class).remove();
       return;
     }
     
