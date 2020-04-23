@@ -2,7 +2,6 @@ package com.honor.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.honor.LD46Game;
 import com.honor.assets.AssetLoader;
+import com.honor.enums.Sounds;
 import com.honor.screens.PlayScreen;
 import com.honor.utils.Constants;
 import com.honor.utils.b2d.BodyBuilder;
@@ -22,7 +22,6 @@ public class Player extends Mob {
 
   private PlayScreen playScreen;
   private AtlasRegion textureUp, textureDown, currentTexture;
-  private Sound explode, shoot, hurt, healthSound;
 
   public int health = 100;
 
@@ -38,12 +37,6 @@ public class Player extends Mob {
     textureUp = atlas.findRegion(PLAYER_UP);
     textureDown = atlas.findRegion(PLAYER_DOWN);
     currentTexture = textureDown;
-    
-    explode = game.assetLoader.get(AssetLoader.EXPLODE_SOUND);
-    shoot = game.assetLoader.get(AssetLoader.SHOOT_SOUND);
-    hurt = game.assetLoader.get(AssetLoader.HURT_SOUND);
-    healthSound = game.assetLoader.get(AssetLoader.HEALTH_SOUND);
-
     
     position = new Vector2(posX, posY);
     width = 64;
@@ -112,14 +105,14 @@ public class Player extends Mob {
 
       Projectile p = new Projectile(game, world, position.x + 16, position.y + 16, angle);
       game.entityManager.addProjectile(p);
-      shoot.play();
+      game.audioManager.play(Sounds.SHOOT);
     }
   }
 
   private void die() {
     if (!died) {
       game.entityManager.stop = true;
-      explode.play(2f);
+      game.audioManager.play(Sounds.EXPLODE, 2f);
       playScreen.enableShockwave();
       died = true;
     }
@@ -127,7 +120,7 @@ public class Player extends Mob {
   
   public void takeDamage() {
     this.health -= 5;
-    hurt.play();
+    game.audioManager.play(Sounds.HURT);
   }
   
   public void heal() {
@@ -135,7 +128,7 @@ public class Player extends Mob {
     if (health > 100) {
       health = 100;
     }
-    healthSound.play(0.3f);
+    game.audioManager.play(Sounds.HEALTH, 0.3f);
   }
   
   public void setPlayScreen(PlayScreen playScreen) {

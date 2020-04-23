@@ -2,6 +2,7 @@ package com.honor.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.honor.LD46Game;
+import com.honor.enums.Screens;
 
 public class LoadingScreen extends LD46GameScreenAdapter {
 
@@ -17,7 +18,7 @@ public class LoadingScreen extends LD46GameScreenAdapter {
   @Override
   public void render(float delta) {
     if (game.assetLoader.update()) {
-      game.setScreen(new MenuScreen(game));
+      game.changeScreen(Screens.MENU);
     }
 
     Gdx.app.log("LoadingScreen", "Loading Assets: " + game.assetLoader.getProgress());
