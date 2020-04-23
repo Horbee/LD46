@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class AssetLoader {
 
@@ -29,6 +30,7 @@ public class AssetLoader {
   public static final String EXPLODE_SOUND = "explode.mp3";
   public static final String HEALTH_SOUND = "health.wav";
   public static final String MUSIC = "music.mp3";
+  public static final String UI_SKIN = "skin/comic-ui.json";
 
   private AssetManager assetManager;
 
@@ -37,6 +39,9 @@ public class AssetLoader {
   }
 
   public void queueAssets() {
+    // Loading UI Skin
+    assetManager.load(UI_SKIN, Skin.class);
+    
     // Loading textures
     assetManager.load(COVER_TEX, Texture.class);
     assetManager.load(START_TEX, Texture.class);
