@@ -4,37 +4,51 @@ size: 512,128
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+cog
+  rotate: false
+  xy: 2, 36
+  size: 74, 74
+  orig: 74, 74
+  offset: 0, 0
+  index: -1
+cogDown
+  rotate: false
+  xy: 78, 36
+  size: 74, 74
+  orig: 74, 74
+  offset: 0, 0
+  index: -1
 goblin_down
   rotate: false
-  xy: 134, 36
+  xy: 286, 46
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 goblin_up
   rotate: false
-  xy: 68, 36
+  xy: 220, 46
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 hearth
   rotate: false
-  xy: 266, 68
+  xy: 418, 78
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_down
   rotate: false
-  xy: 2, 36
+  xy: 154, 46
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 player_up
   rotate: false
-  xy: 200, 36
+  xy: 352, 46
   size: 64, 64
   orig: 64, 64
   offset: 0, 0

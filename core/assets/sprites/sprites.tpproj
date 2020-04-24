@@ -32,7 +32,7 @@ limitMemory=true
 useIndexes=true
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:goblin_down.png,type:Input,regionName:null},{path:goblin_up.png,type:Input,regionName:null},{path:player_down.png,type:Input,regionName:null},{path:player_up.png,type:Input,regionName:null},{path:projectile.png,type:Input,regionName:null},{path:hearth.png,type:Input,regionName:null},{path:score.png,type:Input,regionName:null}]
+inputFiles=[{path:goblin_down.png,type:Input,regionName:null},{path:goblin_up.png,type:Input,regionName:null},{path:player_down.png,type:Input,regionName:null},{path:player_up.png,type:Input,regionName:null},{path:projectile.png,type:Input,regionName:null},{path:hearth.png,type:Input,regionName:null},{path:score.png,type:Input,regionName:null},{path:cog.png,type:Input,regionName:null},{path:cogDown.png,type:Input,regionName:null}]
 
 
 -PROJ-

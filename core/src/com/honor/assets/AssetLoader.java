@@ -9,6 +9,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
@@ -41,7 +42,7 @@ public class AssetLoader {
   public void queueAssets() {
     // Loading UI Skin
     assetManager.load(UI_SKIN, Skin.class);
-    
+
     // Loading textures
     assetManager.load(COVER_TEX, Texture.class);
     assetManager.load(START_TEX, Texture.class);
@@ -55,20 +56,24 @@ public class AssetLoader {
     assetManager.load(EXPLODE_SOUND, Sound.class);
     assetManager.load(HEALTH_SOUND, Sound.class);
     assetManager.load(MUSIC, Music.class);
-    
+
     // Loading TMX levels
     assetManager.setLoader(TiledMap.class, new TmxMapLoader());
     assetManager.load(TEST_LEVEL, TiledMap.class);
-    
+
     // Loading Fonts
     FileHandleResolver resolver = new InternalFileHandleResolver();
     assetManager.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
     assetManager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
-    
+
     FreeTypeFontLoaderParameter balooFont = new FreeTypeFontLoaderParameter();
     balooFont.fontFileName = BALOO_SB_FONT;
     balooFont.fontParameters.size = 24;
     assetManager.load(BALOO_SB_FONT, BitmapFont.class, balooFont);
+  }
+
+  public AtlasRegion getRegionFromSpriteSheet(String filePath) {
+    return get(AssetLoader.SPRITES_ATLAS, TextureAtlas.class).findRegion(filePath);
   }
 
   public boolean update() {
@@ -81,6 +86,10 @@ public class AssetLoader {
 
   public <T> T get(String fileName) {
     return assetManager.get(fileName);
+  }
+  
+  public <T> T get(String fileName, Class<T> type) {
+    return assetManager.get(fileName, type);
   }
 
   public void dispose() {

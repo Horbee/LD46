@@ -3,12 +3,10 @@ package com.honor.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.honor.LD46Game;
-import com.honor.assets.AssetLoader;
 import com.honor.enums.Sounds;
 import com.honor.screens.PlayScreen;
 import com.honor.utils.Constants;
@@ -33,9 +31,8 @@ public class Player extends Mob {
     this.game = game;
     this.world = world;
 
-    TextureAtlas atlas = game.assetLoader.get(AssetLoader.SPRITES_ATLAS);
-    textureUp = atlas.findRegion(PLAYER_UP);
-    textureDown = atlas.findRegion(PLAYER_DOWN);
+    textureUp = game.assetLoader.getRegionFromSpriteSheet(PLAYER_UP);
+    textureDown = game.assetLoader.getRegionFromSpriteSheet(PLAYER_DOWN);
     currentTexture = textureDown;
     
     position = new Vector2(posX, posY);

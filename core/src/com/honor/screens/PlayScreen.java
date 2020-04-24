@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
@@ -70,9 +69,8 @@ public class PlayScreen extends LD46GameScreenAdapter {
 
   public PlayScreen(LD46Game game) {
     super(game);
-    TextureAtlas atlas = game.assetLoader.get(AssetLoader.SPRITES_ATLAS);
-    hearth = atlas.findRegion("hearth");
-    score = atlas.findRegion("score");
+    hearth = game.assetLoader.getRegionFromSpriteSheet("hearth");
+    score = game.assetLoader.getRegionFromSpriteSheet("score");
     
     defaultProjection = new Matrix4();
     defaultProjection.setToOrtho(0, Gdx.graphics.getWidth(), 0, Gdx.graphics.getHeight(), -1.0f,
