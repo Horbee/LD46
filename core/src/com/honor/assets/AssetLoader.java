@@ -3,10 +3,12 @@ package com.honor.assets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -22,6 +24,7 @@ public class AssetLoader {
 
   public static final String COVER_TEX = "cover.png";
   public static final String START_TEX = "start.png";
+  public static final String EXIT_TEX = "sprites/exit.png";
   public static final String SPRITES_ATLAS = "sprites/sprites.atlas";
   public static final String TEST_LEVEL = "levels/testlevel.tmx";
   public static final String BALOO_SB_FONT = "fonts/BalooBhaina2-SemiBold.ttf";
@@ -44,8 +47,13 @@ public class AssetLoader {
     assetManager.load(UI_SKIN, Skin.class);
 
     // Loading textures
-    assetManager.load(COVER_TEX, Texture.class);
-    assetManager.load(START_TEX, Texture.class);
+    TextureParameter textureParam = new TextureParameter();
+    textureParam.magFilter = TextureFilter.Linear;
+    textureParam.minFilter = TextureFilter.Linear;
+
+    assetManager.load(COVER_TEX, Texture.class, textureParam);
+    assetManager.load(START_TEX, Texture.class, textureParam);
+    assetManager.load(EXIT_TEX, Texture.class, textureParam);
 
     // Texture Atlasses
     assetManager.load(SPRITES_ATLAS, TextureAtlas.class);

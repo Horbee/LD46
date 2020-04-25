@@ -4,30 +4,27 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.honor.LD46Game;
 import com.honor.assets.AssetLoader;
 import com.honor.enums.Musics;
 import com.honor.enums.Screens;
+import com.honor.ui.ExitButton;
 import com.honor.ui.PreferencesButton;
 
 public class MenuScreen extends LD46GameScreenAdapter {
 
-  private Texture coverTex, start;
-  private TextureRegionDrawable cover, preferencesUp, preferencesDown;
+  private Texture coverTex, start, exit;
+  private TextureRegionDrawable cover, preferencesUp, preferencesDown, exitUp;
 
   private Stage stage;
 
@@ -37,6 +34,7 @@ public class MenuScreen extends LD46GameScreenAdapter {
     stage = new Stage(new ScreenViewport());
     start = game.assetLoader.get(AssetLoader.START_TEX);
     coverTex = game.assetLoader.get(AssetLoader.COVER_TEX);
+    exit = game.assetLoader.get(AssetLoader.EXIT_TEX);
 
     game.audioManager.init();
     game.audioManager.play(Musics.MAIN_THEME);
@@ -45,6 +43,7 @@ public class MenuScreen extends LD46GameScreenAdapter {
     preferencesDown =
         new TextureRegionDrawable(game.assetLoader.getRegionFromSpriteSheet("cogDown"));
 
+    exitUp = new TextureRegionDrawable(exit);
     cover = new TextureRegionDrawable(coverTex);
   }
 
@@ -57,7 +56,7 @@ public class MenuScreen extends LD46GameScreenAdapter {
 
     Table table = new Table();
     table.setFillParent(true);
-    table.setDebug(true);
+    // table.setDebug(true);
     table.setBackground(cover);
     table.setTouchable(Touchable.enabled);
     table.addListener(new ClickListener() {
@@ -78,22 +77,12 @@ public class MenuScreen extends LD46GameScreenAdapter {
     ));
     stage.addActor(startImage);
     
-    Skin skin = game.assetLoader.get(AssetLoader.UI_SKIN);
-
     PreferencesButton preferences = new PreferencesButton(preferencesUp, preferencesDown, game);
-    TextButton exit = new TextButton("Exit", skin);
-
-    exit.addListener(new ChangeListener() {
-      @Override
-      public void changed(ChangeEvent event, Actor actor) {
-        stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(() -> Gdx.app.exit())));
-      }
-    });
-
-    table.left().bottom();
-    table.add(preferences);
-    table.row().pad(10, 0, 0, 0);
-    table.add(exit).fillX().uniformX();
+    ExitButton exit = new ExitButton(exitUp);
+    
+    table.add(exit).expand().top().right().pad(25);
+    table.row();
+    table.add(preferences).bottom().left().pad(25);
   }
 
   @Override

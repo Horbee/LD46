@@ -11,17 +11,17 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class RectangleActor extends Actor {
 
   private ShapeRenderer renderer;
-  private boolean projectionMatrixSet;
+  private boolean isProjectionSet;
   
   public RectangleActor() {
     renderer = new ShapeRenderer();
-    projectionMatrixSet = false;
+    isProjectionSet = false;
   }
 
   @Override
   public void draw(Batch batch, float parentAlpha) {
     batch.end();
-    if(!projectionMatrixSet){
+    if(!isProjectionSet){
       renderer.setProjectionMatrix(batch.getProjectionMatrix());
     }
     

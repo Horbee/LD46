@@ -175,6 +175,8 @@ public class PlayScreen extends LD46GameScreenAdapter {
 
       game.batch.draw(score, 10, Gdx.graphics.getHeight() - 100);
       balooSb.draw(game.batch, "" + (int) timer, 60, Gdx.graphics.getHeight() - 78);
+      
+      balooSb.draw(game.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 10, Gdx.graphics.getHeight() - 120);
       game.batch.end();
     }
 
