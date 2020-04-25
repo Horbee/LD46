@@ -152,6 +152,7 @@ public class GamePreferences {
     if (isFullscreenChanged || isResolutionChanged || isRefreshRateChanged) {
       if (fullscreen) {
         Gdx.graphics.setFullscreenMode(getDisplayMode(resolution, refreshRate));
+        Gdx.graphics.setVSync(true);
       } else {
         int width = Integer.parseInt(resolution.split("x")[0]);
         int height = Integer.parseInt(resolution.split("x")[1]);

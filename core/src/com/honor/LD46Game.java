@@ -38,6 +38,7 @@ public class LD46Game extends Game {
     if (preferences.isFullscreenEnabled()) {
       if (dm != null) {
         Gdx.graphics.setFullscreenMode(dm);
+        Gdx.graphics.setVSync(true);
       }
     } else {
       if (dm != null) {
