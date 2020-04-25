@@ -1,6 +1,7 @@
 package com.honor.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -13,6 +14,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.honor.LD46Game;
@@ -27,6 +30,7 @@ import com.honor.entities.Mob;
 import com.honor.entities.Player;
 import com.honor.levels.Level;
 import com.honor.listeners.B2dContactListener;
+import com.honor.ui.RectangleActor;
 import com.honor.utils.CameraStyles;
 import com.honor.utils.Constants;
 import com.honor.utils.b2d.BodyBuilder;
@@ -51,6 +55,8 @@ public class PlayScreen extends LD46GameScreenAdapter {
 
   Matrix4 defaultProjection;
 
+  Stage stage;
+  
   RayHandler rayHandler;
   World world;
   Box2DDebugRenderer b2dr;
@@ -118,6 +124,13 @@ public class PlayScreen extends LD46GameScreenAdapter {
     hBlur.setDisabled(true);
     vBlur.setDisabled(true);
     postProcessor.addEffect(shockWave).addEffect(highlightFilter).addEffect(hBlur).addEffect(vBlur);
+    
+    stage = new Stage(viewport);
+    RectangleActor rect = new RectangleActor();
+    rect.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    rect.setColor(Color.BLACK);
+    stage.addActor(rect);
+    stage.addAction(Actions.fadeOut(1f));
   }
 
   @Override
@@ -165,6 +178,8 @@ public class PlayScreen extends LD46GameScreenAdapter {
       game.batch.end();
     }
 
+    stage.act(delta);
+    stage.draw();
   }
 
   private void renderGameOverDied(float delta) {
