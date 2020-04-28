@@ -19,7 +19,6 @@ public class Goblin extends Mob {
   private AtlasRegion textureUp, textureDown, currentTexture;
 
   public Vector2 position;
-  public float width, height;
 
   private int health = 3;
 

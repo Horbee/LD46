@@ -16,7 +16,7 @@ public class Mob extends Entity implements Steerable<Vector2> {
   protected float maxLinearSpeed, maxLinearAcc;
   protected float maxAngularSpeed, maxAngularAcc;
 
-  SteeringBehavior<Vector2> behaviour;
+  SteeringBehavior<Vector2> behavior;
   SteeringAcceleration<Vector2> steeringOutput;
 
   public void initialize(float width) {
@@ -147,18 +147,18 @@ public class Mob extends Entity implements Steerable<Vector2> {
     return body;
   }
 
-  public void setBehaviur(SteeringBehavior<Vector2> behaviour) {
-    this.behaviour = behaviour;
+  public void setBehavior(SteeringBehavior<Vector2> behavior) {
+    this.behavior = behavior;
   }
 
-  public SteeringBehavior<Vector2> getBehaviour() {
-    return behaviour;
+  public SteeringBehavior<Vector2> getBehavior() {
+    return behavior;
   }
 
   @Override
   public void update(float delta) {
-    if (behaviour != null) {
-      behaviour.calculateSteering(steeringOutput);
+    if (behavior != null) {
+      behavior.calculateSteering(steeringOutput);
       applySteering(steeringOutput, delta);
     }
 

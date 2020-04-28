@@ -110,7 +110,7 @@ public class Level {
     Arrive<Vector2> arriveSB = new Arrive<Vector2>(goblin, game.entityManager.getPlayer())
         .setTimeToTarget(0.5f).setArrivalTolerance(1.0f).setDecelerationRadius(10);
 
-    goblin.setBehaviur(arriveSB);
+    goblin.setBehavior(arriveSB);
   }
 
   public void dispose() {
